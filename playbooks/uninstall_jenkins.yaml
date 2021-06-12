@@ -1,0 +1,12 @@
+---
+- hosts: jenkins
+  name: uninstall jenkins on server
+  become: yes
+  
+  tasks:
+    - name: uninstall jenkins
+      apt:
+        pkg: 
+          - openjdk-8-jdk
+          - jenkins
+        state: absent

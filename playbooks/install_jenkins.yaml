@@ -1,0 +1,27 @@
+--- #install jenkins
+- hosts: jenkins
+  name: install jenkins on server
+  become: yes
+  
+  tasks:
+    - name: adding key
+      shell: "wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -"
+
+    #- name: adding to source list
+      #shell: "echo deb https://pkg.jenkins.io/debian-stable binary/ >> /etc/apt/sources.list"
+
+    - name: Update all packages to their latest version
+      apt:
+        name: "*"
+        update_cache: yes
+        state: latest
+
+    - name: Install jenkins
+      apt:
+        pkg: 
+          - openjdk-8-jdk
+          - jenkins
+        state: present
+
+    - name: jenkins admin password
+      shell: "cat /var/lib/jenkins/secrets/initialAdminPassword"
