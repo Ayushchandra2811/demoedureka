@@ -6,6 +6,7 @@
   tasks:
     - name: uninstall jenkins
       apt:
+      shell: sudo apt-get remove --purge jenkins
         pkg: 
           - openjdk-8-jdk
           - jenkins
