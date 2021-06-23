@@ -18,6 +18,11 @@
       shell: "docker-compose down"
       args:
         chdir: /home/ubuntu/project1/
+    
+    - name: running projcert
+      shell: "docker-compose up -d"
+      args:
+        chdir: /home/ubuntu/project1/
 
     - name: Git checkout
       ansible.builtin.git:
