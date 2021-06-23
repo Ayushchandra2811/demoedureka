@@ -8,6 +8,17 @@
   become: yes
   gather_facts: no
   tasks:
+    - name: Install docker-compose
+      apt:
+        pkg: 
+          - docker-compose
+        state: present
+
+    - name: stopping projcert
+      shell: "docker-compose down"
+      args:
+        chdir: /home/ubuntu/project1/
+
     - name: Git checkout
       ansible.builtin.git:
         repo: 'https://github.com/Ayushchandra2811/projCert.git'
@@ -20,17 +31,7 @@
     #     update_cache: yes
     #     state: latest
 
-    - name: Install docker-compose
-      apt:
-        pkg: 
-          - docker-compose
-        state: present
-
-    - name: stopping projcert
-      shell: "docker-compose down"
-      args:
-        chdir: /home/ubuntu/project1/
-
+   
     - name: running projcert
       shell: "docker-compose up -d"
       args:
